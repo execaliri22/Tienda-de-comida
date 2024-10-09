@@ -59,6 +59,6 @@
         <p>Gracias por su compra</p>
     </footer>
 
-    <script src="JS/Finalizar-compra.js"></script> <!-- Asegúrate de que esta ruta sea correcta -->
+   <script src="Finalizar-compra.js"></script>
 </body>
 </html>
