@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     const resumenPedido = document.querySelector('#resumen-pedido tbody');
-    const carritoItems = JSON.parse(localStorage.getItem('carritoItems')) || [];
+    let carritoItems = [];
+
+    // Intentar cargar los elementos del carrito del localStorage
+    try {
+        carritoItems = JSON.parse(localStorage.getItem('carritoItems')) || [];
+    } catch (error) {
+        console.error('Error al leer el carrito del localStorage:', error);
+    }
 
     console.log('Carrito cargado:', carritoItems);
 
@@ -25,12 +32,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Formulario enviado');
 
+        // Validar que haya productos en el carrito
+        if (carritoItems.length === 0) {
+            alert('No puedes realizar una compra sin productos en el carrito.');
+            return;
+        }
+
         // Obtener los datos del formulario
         const direccion = document.getElementById('direccion').value.trim();
         const opcionEnvio = document.querySelector('input[name="envio"]:checked');
 
+        // Validar que se haya seleccionado una opción de envío
         if (!opcionEnvio) {
             alert('Por favor, selecciona una opción de envío.');
+            return;
+        }
+
+        // Validar dirección
+        if (!direccion) {
+            alert('La dirección no puede estar vacía.');
             return;
         }
 
@@ -39,12 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             opcionEnvio: opcionEnvio.value,
             carritoItems
         };
-
-        // Validar dirección
-        if (!direccion) {
-            alert('La dirección no puede estar vacía.');
-            return;
-        }
 
         console.log('Enviando datos al backend', data);
 
@@ -62,15 +76,29 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(result => {
-            if (result.success) {
-                alert('¡Compra realizada con éxito!');
+            console.log(result); // Verifica la respuesta completa
+            if (result && result.success) {
+                alert('Compra realizada con éxito!');
                 localStorage.removeItem('carritoItems');
-                window.location.href = 'gracias.html';
+                
+                // Eliminar mensaje de éxito anterior si existe
+                const mensajeExistente = document.getElementById('mensaje-exito');
+                if (mensajeExistente) {
+                    mensajeExistente.remove();
+                }
+
+                // Mostrar un nuevo mensaje de éxito
+                const mensajeExito = document.createElement('div');
+                mensajeExito.id = 'mensaje-exito';
+                mensajeExito.textContent = 'Gracias por su compra. Su pedido ha sido procesado con éxito.';
+                mensajeExito.style.color = 'green';
+                document.body.appendChild(mensajeExito);
+                
             } else {
-                alert(`Hubo un error en la compra: ${result.error}`);
+                alert(`Hubo un error en la compra: ${result?.error || 'Error desconocido'}`);
             }
         })
-        .catch(error => {
+        .catch(async error => {
             console.error('Error en la solicitud:', error);
             alert('Error al realizar la compra. Por favor, inténtalo de nuevo.');
         });
