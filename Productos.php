@@ -124,7 +124,7 @@
                                     <img src="images/food1.png" alt="">           
                                 </div>
                                 <div class="product-txt">
-                                    <h4>Producto</h4>
+                                    <h4>haburguesa</h4>
                                     <p>Calidad premium</p>
                                     <span class="price">$80.00</span>
                                 </div>

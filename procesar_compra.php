@@ -50,7 +50,7 @@ if ($sql === false) {
 // Insertar cada producto del carrito
 foreach ($carritoItems as $item) {
     $nombreProducto = $conexion->real_escape_string($item['nombre']);
-    $precioProducto = floatval($item['precio']); // Asegurar que sea un número decimal
+    $precioProducto = floatval(str_replace('$', '', $item['precio'])); 
 
     // Vincular los parámetros
     $sql->bind_param('sssd', $nombreProducto, $direccion, $opcionEnvio, $precioProducto);
