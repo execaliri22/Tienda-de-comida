@@ -40,6 +40,7 @@
                 <label for="direccion">Dirección de Envío:</label>
                 <input type="text" id="direccion" name="direccion" required>
 
+                <!-- Opciones de entrega -->
                 <label for="opcion-envio">Opciones de Entrega:</label>
                 <div>
                     <input type="radio" id="retiro-local" name="envio" value="retiro-local" checked>
@@ -48,6 +49,29 @@
                 <div>
                     <input type="radio" id="envio-domicilio" name="envio" value="envio-domicilio">
                     <label for="envio-domicilio">Envío a domicilio</label>
+                </div>
+
+                <!-- Opciones de pago -->
+                <label for="opcion-pago">Método de Pago:</label>
+                <div>
+                    <input type="radio" id="pago-efectivo" name="pago" value="efectivo" checked>
+                    <label for="pago-efectivo">Pago en Efectivo</label>
+                </div>
+                <div>
+                    <input type="radio" id="pago-tarjeta" name="pago" value="tarjeta">
+                    <label for="pago-tarjeta">Pago con Tarjeta</label>
+                </div>
+
+                <!-- Campos de tarjeta, ocultos por defecto -->
+                <div id="campos-tarjeta" style="display: none;">
+                    <label for="numero-tarjeta">Número de Tarjeta:</label>
+                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" pattern="\d{16}" placeholder="1234 5678 9123 4567">
+
+                    <label for="fecha-expiracion">Fecha de Expiración:</label>
+                    <input type="text" id="fecha-expiracion" name="fecha-expiracion" placeholder="MM/AA" pattern="\d{2}/\d{2}">
+
+                    <label for="codigo-seguridad">Código de Seguridad:</label>
+                    <input type="text" id="codigo-seguridad" name="codigo-seguridad" pattern="\d{3}" placeholder="123">
                 </div>
 
                 <button type="submit" class="btn-2">Confirmar Compra</button>

@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $data = json_decode(file_get_contents("php://input"), true);
 
 // Verifica que se recibieron los datos
-if (!isset($data['direccion']) || !isset($data['opcionEnvio']) || !isset($data['carritoItems'])) {
+if (!isset($data['direccion']) || !isset($data['opcionEnvio']) || !isset($data['opcionPago']) || !isset($data['carritoItems'])) {
     http_response_code(400); // Solicitud incorrecta
     echo json_encode(['success' => false, 'error' => 'Datos incompletos']);
     exit;
@@ -36,10 +36,11 @@ if (!isset($data['direccion']) || !isset($data['opcionEnvio']) || !isset($data['
 // Asignar y sanitizar datos
 $direccion = $conexion->real_escape_string($data['direccion']);
 $opcionEnvio = $conexion->real_escape_string($data['opcionEnvio']);
+$opcionPago = $conexion->real_escape_string($data['opcionPago']);
 $carritoItems = $data['carritoItems'];
 
-// Preparar la consulta SQL para evitar inyecciones SQL
-$sql = $conexion->prepare("INSERT INTO compras (nombre_P, direccion, opcion_envio, fecha, precio) VALUES (?, ?, ?, NOW(), ?)");
+// Preparar la consulta SQL para incluir la opción de pago
+$sql = $conexion->prepare("INSERT INTO compras (nombre_P, direccion, opcion_envio, opcion_pago, fecha, precio) VALUES (?, ?, ?, ?, NOW(), ?)");
 
 if ($sql === false) {
     http_response_code(500); // Error en la preparación de la consulta
@@ -47,13 +48,13 @@ if ($sql === false) {
     exit;
 }
 
-// Insertar cada producto del carrito
+// Insertar cada producto del carrito con el método de pago seleccionado
 foreach ($carritoItems as $item) {
     $nombreProducto = $conexion->real_escape_string($item['nombre']);
     $precioProducto = floatval(str_replace('$', '', $item['precio'])); 
 
     // Vincular los parámetros
-    $sql->bind_param('sssd', $nombreProducto, $direccion, $opcionEnvio, $precioProducto);
+    $sql->bind_param('ssssd', $nombreProducto, $direccion, $opcionEnvio, $opcionPago, $precioProducto);
 
     // Ejecutar la consulta
     if (!$sql->execute()) {

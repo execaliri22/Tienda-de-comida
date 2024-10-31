@@ -41,22 +41,29 @@ document.addEventListener('DOMContentLoaded', function() {
         // Obtener los datos del formulario
         const direccion = document.getElementById('direccion').value.trim();
         const opcionEnvio = document.querySelector('input[name="envio"]:checked');
+        const opcionPago = document.querySelector('input[name="pago"]:checked');
 
-        // Validar que se haya seleccionado una opción de envío
-        if (!opcionEnvio) {
-            alert('Por favor, selecciona una opción de envío.');
-            return;
-        }
-
-        // Validar dirección
+        // Validar datos
         if (!direccion) {
             alert('La dirección no puede estar vacía.');
             return;
         }
 
+        if (!opcionEnvio) {
+            alert('Por favor, selecciona una opción de envío.');
+            return;
+        }
+
+        if (!opcionPago) {
+            alert('Por favor, selecciona un método de pago.');
+            return;
+        }
+
+        // Preparar datos para enviar al backend
         const data = {
             direccion,
             opcionEnvio: opcionEnvio.value,
+            opcionPago: opcionPago.value, // Captura la opción de pago
             carritoItems
         };
 
@@ -76,18 +83,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(result => {
-            console.log(result); // Verifica la respuesta completa
             if (result && result.success) {
                 alert('Compra realizada con éxito!');
                 localStorage.removeItem('carritoItems');
-                
-                // Eliminar mensaje de éxito anterior si existe
-                const mensajeExistente = document.getElementById('mensaje-exito');
-                if (mensajeExistente) {
-                    mensajeExistente.remove();
-                }
 
-                // Mostrar un nuevo mensaje de éxito
+                // Mostrar mensaje de éxito
                 const mensajeExito = document.createElement('div');
                 mensajeExito.id = 'mensaje-exito';
                 mensajeExito.textContent = 'Gracias por su compra. Su pedido ha sido procesado con éxito.';
@@ -98,9 +98,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(`Hubo un error en la compra: ${result?.error || 'Error desconocido'}`);
             }
         })
-        .catch(async error => {
+        .catch(error => {
             console.error('Error en la solicitud:', error);
             alert('Error al realizar la compra. Por favor, inténtalo de nuevo.');
         });
+    });
+
+    // Mostrar u ocultar los campos de tarjeta según el método de pago
+    const camposTarjeta = document.getElementById('campos-tarjeta');
+    const radioEfectivo = document.getElementById('pago-efectivo');
+    const radioTarjeta = document.getElementById('pago-tarjeta');
+
+    radioEfectivo.addEventListener('change', function() {
+        camposTarjeta.style.display = radioEfectivo.checked ? 'none' : 'block';
+    });
+
+    radioTarjeta.addEventListener('change', function() {
+        camposTarjeta.style.display = radioTarjeta.checked ? 'block' : 'none';
     });
 });
