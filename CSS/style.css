@@ -54,6 +54,7 @@ body {
 
 .navbar {
     display: flex;
+    margin-right:70px;
 }
 
 .menu-1 {
@@ -79,7 +80,7 @@ body {
 }
 
 .social {
-    margin: 0 10px;
+    margin: 0 9px;
     height: 40px;
     width: 40px;
     border: 1px solid #DB241B;
@@ -93,6 +94,50 @@ body {
 .social img {
     margin: 8px 0 0 10px;
 }
+
+
+
+.unique-button img {
+    width: 20px; /* Tamaño del icono */
+    height: 20px;
+    margin-left: 300px;
+}
+
+/* Contenedor de perfil */
+.profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Imagen de perfil */
+.profile-info #profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+
+/* Nombre de usuario */
+.profile-info #username {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Estilo adicional para ajustar el espacio y alineación */
+.profile-info {
+    margin-left: auto;
+    padding-right: 20px;
+}
+
+
+
+
+
+
 
 .menu .navbar ul li {
     position: relative;

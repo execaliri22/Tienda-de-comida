@@ -20,14 +20,18 @@ if (isset($_POST['login'])) {
     $resultado = mysqli_query($conexion, $consulta);
 
     if (mysqli_num_rows($resultado) > 0) {
-      
+        $usuario = mysqli_fetch_assoc($resultado);
+        
+        $_SESSION['usuario_id'] = $usuario['id'];
+        $_SESSION['nombre_usuario'] = $usuario['nombre']; // Asumiendo que 'nombre' es el campo del nombre de usuario
 
-        $_SESSION['usuario'] = $email;
-        header("Location: http://127.0.0.1:5500/index2.html");
+        header("Location: index2.php"); // Cambia la extensión de index2 a .php
+        exit();
     } else {
         echo "<h3 class='error'>Correo o contraseña incorrectos</h3>";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +40,7 @@ if (isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/Login-index.css">
 </head>
 <body>
     <div class="container">

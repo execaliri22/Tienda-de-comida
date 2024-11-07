@@ -21,7 +21,7 @@
         <nav class="navbar">
          <div class="menu-1">
             <ul>
-                <li><a href="inde.html">Inicio</a></li>
+                <li><a href="index2.html">Inicio</a></li>
             </ul>  
          </div>
          <img class="logo-2" src="images/logo.svg" alt="">     

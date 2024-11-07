@@ -57,6 +57,7 @@
                     <input type="radio" id="pago-efectivo" name="pago" value="efectivo" checked>
                     <label for="pago-efectivo">Pago en Efectivo</label>
                 </div>
+                
                 <div>
                     <input type="radio" id="pago-tarjeta" name="pago" value="tarjeta">
                     <label for="pago-tarjeta">Pago con Tarjeta</label>

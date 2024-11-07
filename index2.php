@@ -1,4 +1,11 @@
+<?php
+session_start();
 
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php"); // Redirige al login si no hay sesión activa
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,37 +23,32 @@
     <img src="images/menu.png" class="menu-icono" alt="">
     </label>
     <nav class="navbar">
-     <div class="menu-1">
-        <ul>
-            <li><a href="Productos.html">Menú</Menu></a></li>
-        </ul>  
-      
-     </div>
-     <img class="logo-2" src="images/logo.svg" alt="">     
-     <div class="menu-2">
-      
-        
-        <div class="socials">
-            <a href="#">
-                <div class="social">
-                    <img src="images/s1.svg" alt="">
-                </div>
-            </a>
-            <a href="#">
-                <div class="social">
-                    <img src="images/s2.svg" alt="">
-                </div>
-            </a>
-            <a href="#">
-                <div class="social">
-                    <img src="images/s3.svg" alt="">
-                </div>
-            </a>
-
-        </div>
-     </div>
-    </nav>
+      <div class="profile-info">
+        <img id="profile-pic" src="default-profile.png" alt="Foto de perfil">
+        <h2 id="username"><?php echo $_SESSION['nombre_usuario']; ?></h2> <!-- Muestra el nombre de usuario -->
+    </div>
+      <div class="menu-1">
+          <ul>
+              <li><a href="https://localhost/PHP-registro/productos.php">Menú</a></li>
+          </ul>  
+      </div>
+      <img class="logo-2" src="images/logo.svg" alt="Logo">     
+      <div class="menu-2">
+          <div class="socials">
+              <!-- Botón de usuario con submenú -->
+              <a href="http://localhost/PHP-registro/usuario.php" class="unique-button" id="userButton">
+                  <img src="images/usuario.png" alt="Icono de Usuario">
+              </a>
+              
+          </div>
+      </div>
+  </nav>
+  
 </div>
+
+
+
+
 
 
 
@@ -60,10 +62,7 @@
                       <p>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, eveniet mollitia saepe aut doloremque exercitationem modi recusandae qui, sapiente, odio nihil magnam tempora minima expedita a atque ea voluptatem suscipit.
                       </p>
-                      <div class="botones">
-                          <a href="#" class="btn-1">Comprar</a>
-                          <a href="#" class="btn-1">Menu</a>
-                      </div>
+                    
                   </div>
                   <div class="slider-img">
                       <img src="images/slider1.png" alt="">
@@ -273,7 +272,7 @@
     <div class="info-txt">
         <h2>Informacion</h2>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. At nulla animi voluptatem, temporibus minus cupiditate voluptates facere illum quaerat qui, nisi architecto optio laboriosam mollitia error ratione eveniet itaque quod.</p>
-        <a href="#" class="btn-2">Mas informacion</a>
+      
     </div>
 </section>
 
