@@ -25,7 +25,7 @@ if (isset($_POST['login'])) {
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['nombre_usuario'] = $usuario['nombre']; // Asumiendo que 'nombre' es el campo del nombre de usuario
 
-        header("Location: index2.php"); // Cambia la extensión de index2 a .php
+        header("Location: inicio.php"); // Cambia la extensión de index2 a .php
         exit();
     } else {
         echo "<h3 class='error'>Correo o contraseña incorrectos</h3>";

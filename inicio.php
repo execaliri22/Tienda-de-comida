@@ -1,11 +1,14 @@
 <?php
-session_start();
+session_start(); // Asegúrate de que esté aquí
 
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php"); // Redirige al login si no hay sesión activa
-    exit();
+// Tu código para acceder a $_SESSION después de iniciar la sesión
+if (isset($_SESSION['usuario_id'])) {
+    // Hacer algo con la variable $_SESSION
+} else {
+    echo "No hay sesión activa.";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

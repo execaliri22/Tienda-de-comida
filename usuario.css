@@ -1,0 +1,217 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0b0b0b;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 30px;
+    position: relative; /* Asegura que el botón "Inicio" esté posicionado relativo a esta sección */
+}
+
+/* Sección de Perfil */
+.profile-section {
+    background-color: #181818;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.profile-section:hover {
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.6);
+}
+
+.profile-section h1 {
+    text-align: center;
+    font-size: 3rem;  /* Tamaño aumentado */
+    font-family: 'Arial', Helvetica, sans-serif;  /* Fuente elegante */
+    font-weight: 700;  /* Peso más pronunciado */
+    color: #a10000;  /* Rojo suave */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5), 0 0 25px #000000, 0 0 5px #000000;  /* Sombra con efecto de resplandor */
+    transform: translateY(-5px);  /* Ligero desplazamiento hacia arriba */
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.profile-section h1:hover {
+    transform: translateY(-10px);  /* Efecto de movimiento al pasar el mouse */
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7), 0 0 30px #2e0101, 0 0 10px #3a0101;  /* Sombra más pronunciada */
+}
+
+.profile-info {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#username {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #333;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Sección de Configuraciones y Compras */
+.settings-and-purchases {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Sección de Configuraciones */
+.settings-section {
+    width: 45%;
+    min-width: 300px;
+}
+
+.settings-item {
+    background-color: #181818;
+    margin-bottom: 30px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.settings-item:hover {
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.6);
+}
+
+.settings-item h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #ff3333;  /* Rojo similar al estilo anterior */
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #222;
+    color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #ff3333;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background-color: #ff3333;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #e70000;  /* Rojo oscuro */
+    transform: translateY(-2px);
+}
+
+/* Botón "Inicio" en la esquina superior derecha */
+/* Contenedor para el botón "Inicio" */
+/* Contenedor para el botón "Inicio" */
+.button-container {
+    position: absolute; /* Esto asegura que el botón se coloque fuera del flujo normal */
+    top: 10px;
+    left: 20px;  /* Cambié 'right' por 'left' para que se coloque en la esquina superior izquierda */
+    z-index: 1000;  /* Asegura que el botón esté por encima de otros elementos */
+}
+
+/* Estilos para el botón "Inicio" */
+#inicio-button {
+    background-color: #ff3333;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#inicio-button:hover {
+    background-color: #e70000;  /* Rojo oscuro */
+    transform: translateY(-2px);
+}
+
+/* Sección de Mis Compras */
+.purchases-section {
+    width: 45%;
+    min-width: 300px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: #181818;
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+table th,
+table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+table th {
+    background-color: #ff3333;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+table td {
+    font-size: 1rem;
+    color: #fff;
+}
+
+table tr:hover {
+    background-color: #333;
+}
+
+/* Responsividad para dispositivos pequeños */
+@media (max-width: 768px) {
+    .settings-and-purchases {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .settings-section, .purchases-section {
+        width: 100%;
+    }
+}
