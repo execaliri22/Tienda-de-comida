@@ -82,7 +82,9 @@ if (isset($_FILES['foto_perfil'])) {
                 $sql = "INSERT INTO fotos (usuario_id, foto_url) VALUES ($usuario_id, '$foto_url')";
 
                 if ($conn->query($sql) === TRUE) {
-                    echo "Foto de perfil actualizada con éxito.";
+                    // Actualizar la foto en la sesión para que se refleje en inicio.php
+                    $_SESSION['foto_perfil'] = $foto_url;
+                   
                 } else {
                     echo "Error al actualizar la foto: " . $conn->error;
                 }
@@ -156,7 +158,7 @@ $conn->close();
 
         <!-- Botón de inicio -->
         <div class="button-container">
-            <button id="inicio-button" onclick="window.location.href='https://localhost/PHP-registro/inicio.php'">Inicio</button>
+            <button id="inicio-button" onclick="window.location.href='inicio.php'">Inicio</button>
         </div>
 
         <!-- Sección de configuraciones y compras -->
@@ -219,4 +221,3 @@ $conn->close();
     <script src="JS/usuario.js"></script>
 </body>
 </html>
-
