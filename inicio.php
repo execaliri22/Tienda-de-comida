@@ -18,7 +18,7 @@ if (isset($_SESSION['usuario_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/inicio.css">
 </head>
 <body>
 <header>
@@ -34,19 +34,23 @@ if (isset($_SESSION['usuario_id'])) {
         <img id="profile-pic" src="<?php echo $foto_perfil; ?>" alt="Foto de perfil">
         <h2 id="username"><?php echo $_SESSION['nombre_usuario']; ?></h2> <!-- Muestra el nombre de usuario -->
     </div>
+    
+      <img class="logo-2" src="images/logo.svg" alt="Logo">     
+      <div class="menu-2">
+
       <div class="menu-1">
           <ul>
               <li><a href="https://localhost/PHP-registro/productos.php">Menú</a></li>
           </ul>  
       </div>
-      <img class="logo-2" src="images/logo.svg" alt="Logo">     
-      <div class="menu-2">
+
           <div class="socials">
               <!-- Botón de usuario con submenú -->
               <a href="http://localhost/PHP-registro/usuario.php" class="unique-button" id="userButton">
                   <img src="images/usuario.png" alt="Icono de Usuario">
               </a>
           </div>
+        
       </div>
   </nav>
 </div>

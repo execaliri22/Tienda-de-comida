@@ -133,7 +133,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="usuario2.css">
+    <link rel="stylesheet" href="usuario3.css">
     <title>Página de Perfil</title>
 </head>
 <body>
@@ -163,7 +163,7 @@ $conn->close();
         <div class="settings-and-purchases">
             <div class="settings-section">
                 <section class="settings-item">
-                    <h2>Editar Perfil</h2>
+                    <h2>Editar nombre de usuario</h2>
                     <form method="POST" action="usuario.php">
                         <input type="text" id="username-input" name="nombre_usuario" placeholder="Ingrese su nombre de usuario" value="<?php echo htmlspecialchars($_SESSION['nombre_usuario']); ?>" required>
                         <button type="submit">Actualizar</button>
