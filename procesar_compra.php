@@ -16,6 +16,15 @@ if ($conexion->connect_errno) {
     exit;
 }
 
+// Verifica que el usuario ha iniciado sesión
+if (!isset($_SESSION['usuario_id'])) {
+    http_response_code(401); // No autorizado
+    echo json_encode(['success' => false, 'error' => 'Usuario no autenticado']);
+    exit;
+}
+
+$usuario_id = $_SESSION['usuario_id']; // Obtiene el ID del usuario desde la sesión
+
 // Verifica que se recibió una solicitud POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); // Método no permitido
@@ -39,8 +48,8 @@ $opcionEnvio = $conexion->real_escape_string($data['opcionEnvio']);
 $opcionPago = $conexion->real_escape_string($data['opcionPago']);
 $carritoItems = $data['carritoItems'];
 
-// Preparar la consulta SQL para incluir la opción de pago
-$sql = $conexion->prepare("INSERT INTO compras (nombre_P, direccion, opcion_envio, opcion_pago, fecha, precio) VALUES (?, ?, ?, ?, NOW(), ?)");
+// Preparar la consulta SQL para incluir el usuario_id
+$sql = $conexion->prepare("INSERT INTO compras (usuario_id, nombre_P, direccion, opcion_envio, opcion_pago, fecha, precio) VALUES (?, ?, ?, ?, ?, NOW(), ?)");
 
 if ($sql === false) {
     http_response_code(500); // Error en la preparación de la consulta
@@ -48,13 +57,13 @@ if ($sql === false) {
     exit;
 }
 
-// Insertar cada producto del carrito con el método de pago seleccionado
+// Insertar cada producto del carrito con el usuario_id
 foreach ($carritoItems as $item) {
     $nombreProducto = $conexion->real_escape_string($item['nombre']);
-    $precioProducto = floatval(str_replace('$', '', $item['precio'])); 
+    $precioProducto = floatval(str_replace('$', '', $item['precio']));
 
     // Vincular los parámetros
-    $sql->bind_param('ssssd', $nombreProducto, $direccion, $opcionEnvio, $opcionPago, $precioProducto);
+    $sql->bind_param('issssd', $usuario_id, $nombreProducto, $direccion, $opcionEnvio, $opcionPago, $precioProducto);
 
     // Ejecutar la consulta
     if (!$sql->execute()) {
