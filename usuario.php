@@ -24,9 +24,6 @@ if ($conn->connect_error) {
 // Obtener el ID del usuario desde la sesión
 $usuario_id = $_SESSION['usuario_id'];
 
-// Variable para el nombre actualizado
-$nombre_actual = '';
-
 // Si el formulario ha sido enviado para actualizar el nombre de usuario
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre_usuario'])) {
     $nombre_usuario = $_POST['nombre_usuario'];
@@ -51,6 +48,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre_usuario'])) {
 if (isset($_FILES['foto_perfil'])) {
     // Verificar si el archivo se subió correctamente
     if ($_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK) {
+        // Verificar y obtener la foto actual del usuario desde la base de datos
+        $sql = "SELECT foto_url FROM fotos WHERE usuario_id = $usuario_id ORDER BY idfotos LIMIT 1";
+        $result = $conn->query($sql);
+        $foto_url = '';
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $foto_url = $row['foto_url'];
+        }
+
+        // Si existe una foto anterior, eliminarla tanto en la base de datos como en la carpeta 'uploads'
+        if ($foto_url) {
+            // Eliminar archivo de la carpeta 'uploads/'
+            if (file_exists($foto_url)) {
+                unlink($foto_url); // Elimina el archivo
+            }
+
+            // Eliminar la foto de la base de datos
+            $sql = "DELETE FROM fotos WHERE usuario_id = $usuario_id";
+            $conn->query($sql);
+        }
+
         // Validar y mover el archivo a la carpeta de imágenes
         $foto_temp = $_FILES['foto_perfil']['tmp_name'];
         $foto_nombre = basename($_FILES['foto_perfil']['name']);
@@ -60,7 +78,7 @@ if (isset($_FILES['foto_perfil'])) {
         if (getimagesize($foto_temp)) {
             // Mover el archivo a la carpeta de destino
             if (move_uploaded_file($foto_temp, $foto_url)) {
-                // Actualizar la foto en la base de datos
+                // Insertar la nueva foto en la base de datos
                 $sql = "INSERT INTO fotos (usuario_id, foto_url) VALUES ($usuario_id, '$foto_url')";
 
                 if ($conn->query($sql) === TRUE) {
@@ -115,25 +133,28 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="usuario.css">
+    <link rel="stylesheet" href="usuario2.css">
     <title>Página de Perfil</title>
 </head>
 <body>
     <div class="container">
-        <!-- Sección de Perfil -->
-        <div class="profile-section">
-            <h1>Perfil de usuario</h1>
+        <!-- Sección de perfil -->
+        <div class="profile-container">
             <div class="profile-info">
-                <!-- Foto de perfil -->
-                <?php if ($foto_url): ?>
-                    <img src="<?php echo htmlspecialchars($foto_url); ?>" alt="Foto de perfil" class="profile-photo">
-                <?php else: ?>
-                    <p>No tienes foto de perfil.</p>
-                <?php endif; ?>
-                <h2 id="username"><?php echo htmlspecialchars($_SESSION['nombre_usuario']); ?></h2>
+                <div class="profile-photo-container">
+                    <?php if ($foto_url): ?>
+                        <img src="<?php echo htmlspecialchars($foto_url); ?>" alt="Foto de perfil" class="profile-photo">
+                    <?php else: ?>
+                        <div class="default-photo">No tienes foto de perfil</div>
+                    <?php endif; ?>
+                </div>
+                <div class="username-container">
+                    <h1><?php echo htmlspecialchars($_SESSION['nombre_usuario']); ?></h1>
+                </div>
             </div>
         </div>
 
+        <!-- Botón de inicio -->
         <div class="button-container">
             <button id="inicio-button" onclick="window.location.href='https://localhost/PHP-registro/inicio.php'">Inicio</button>
         </div>
@@ -149,7 +170,6 @@ $conn->close();
                     </form>
                 </section>
 
-                <!-- Subir foto de perfil -->
                 <section class="settings-item">
                     <h2>Subir Foto de Perfil</h2>
                     <form method="POST" action="usuario.php" enctype="multipart/form-data">
@@ -163,6 +183,7 @@ $conn->close();
                 </section>
             </div>
 
+            <!-- Sección de compras -->
             <div class="purchases-section">
                 <section class="settings-item">
                     <h2>Mis Compras</h2>
@@ -198,3 +219,4 @@ $conn->close();
     <script src="JS/usuario.js"></script>
 </body>
 </html>
+
