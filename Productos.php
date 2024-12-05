@@ -168,8 +168,7 @@
                         </div>
                     </div>
 
-    
-                        <!-- Otros swiper-slide con el mismo formato -->
+    s
     
                     </div>
     
@@ -239,7 +238,6 @@
 
                         
 
-                        <!-- Otros swiper-slide con el mismo formato -->
     
                     </div>
     
@@ -305,7 +303,6 @@
                     </div>
 
     
-                        <!-- Otros swiper-slide con el mismo formato -->
     
                     </div>
     

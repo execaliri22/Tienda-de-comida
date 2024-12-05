@@ -48,24 +48,21 @@ $opcionEnvio = $conexion->real_escape_string($data['opcionEnvio']);
 $opcionPago = $conexion->real_escape_string($data['opcionPago']);
 $carritoItems = $data['carritoItems'];
 
-// Preparar la consulta SQL para incluir el usuario_id
+
 $sql = $conexion->prepare("INSERT INTO compras (usuario_id, nombre_P, direccion, opcion_envio, opcion_pago, fecha, precio) VALUES (?, ?, ?, ?, ?, NOW(), ?)");
 
 if ($sql === false) {
-    http_response_code(500); // Error en la preparación de la consulta
+    http_response_code(500); 
     echo json_encode(['success' => false, 'error' => 'Error al preparar la consulta SQL']);
     exit;
 }
 
-// Insertar cada producto del carrito con el usuario_id
 foreach ($carritoItems as $item) {
     $nombreProducto = $conexion->real_escape_string($item['nombre']);
     $precioProducto = floatval(str_replace('$', '', $item['precio']));
 
-    // Vincular los parámetros
     $sql->bind_param('issssd', $usuario_id, $nombreProducto, $direccion, $opcionEnvio, $opcionPago, $precioProducto);
 
-    // Ejecutar la consulta
     if (!$sql->execute()) {
         http_response_code(500); // Error del servidor
         echo json_encode(['success' => false, 'error' => $sql->error]);

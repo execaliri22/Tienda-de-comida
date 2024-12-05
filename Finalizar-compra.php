@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aquí se llenará con los productos seleccionados -->
+                
                 </tbody>
             </table>
         </section>
@@ -40,7 +40,7 @@
                 <label for="direccion">Dirección de Envío:</label>
                 <input type="text" id="direccion" name="direccion" required>
 
-                <!-- Opciones de entrega -->
+             
                 <label for="opcion-envio">Opciones de Entrega:</label>
                 <div>
                     <input type="radio" id="retiro-local" name="envio" value="retiro-local" checked>
@@ -51,7 +51,6 @@
                     <label for="envio-domicilio">Envío a domicilio</label>
                 </div>
 
-                <!-- Opciones de pago -->
                 <label for="opcion-pago">Método de Pago:</label>
                 <div>
                     <input type="radio" id="pago-efectivo" name="pago" value="efectivo" checked>
@@ -63,7 +62,6 @@
                     <label for="pago-tarjeta">Pago con Tarjeta</label>
                 </div>
 
-                <!-- Campos de tarjeta, ocultos por defecto -->
                 <div id="campos-tarjeta" style="display: none;">
                     <label for="numero-tarjeta">Número de Tarjeta:</label>
                     <input type="text" id="numero-tarjeta" name="numero-tarjeta" pattern="\d{16}" placeholder="1234 5678 9123 4567">

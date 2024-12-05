@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Inicializamos el carrusel
+    
     var myCarousel = new bootstrap.Carousel(document.getElementById('carouselExample'), {
-        interval: 2000, // Cambia el intervalo entre las transiciones de las diapositivas (en milisegundos)
-        wrap: true // Permite que el carrusel vuelva al principio después de llegar a la última diapositiva
+        interval: 2000, 
+        wrap: true 
     });
 });
 
@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarEventListeners();
 
     function cargarEventListeners() {
-        // Agrega event listeners a los botones de "Agregar al carrito"
         document.querySelectorAll('.product .btn').forEach(btn => {
             btn.addEventListener('click', comprarElemento);
         });
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             carrito.addEventListener('click', eliminarElemento);
         }
 
-        // Event listener para vaciar el carrito
         if (vaciarCarritoBtn) {
             vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
         }
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             imagen: elemento.querySelector('img').src,
             titulo: elemento.querySelector('h4').textContent,
             precio: elemento.querySelector('.price').textContent,
-            id: Date.now() // Genera un ID único usando la hora actual
+            id: Date.now() 
         };
         insertarCarrito(infoElemento);
     }
@@ -85,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('comprar-carrito').addEventListener('click', function(event) {
-    event.preventDefault(); // Evita la acción por defecto del enlace si es necesario
+    event.preventDefault(); 
 
     const carritoItems = [];
     const rows = document.querySelectorAll('#lista-carrito tbody tr');

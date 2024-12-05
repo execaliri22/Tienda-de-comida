@@ -181,7 +181,7 @@ $conn->close();
                 </section>
 
                 <section class="settings-item">
-                    <button id="logout-button">Cerrar Sesión</button>
+                    <button onclick="window.location.href='inde.html'" id="logout-button">Cerrar Sesión</button>
                 </section>
             </div>
 

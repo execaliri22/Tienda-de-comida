@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mostrar u ocultar los campos de tarjeta según el método de pago
+    // Mostrar o ocultar los campos de tarjeta según el método de pago
     const camposTarjeta = document.getElementById('campos-tarjeta');
     const radioEfectivo = document.getElementById('pago-efectivo');
     const radioTarjeta = document.getElementById('pago-tarjeta');
