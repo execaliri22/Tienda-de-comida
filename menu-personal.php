@@ -44,7 +44,7 @@ if (isset($_SESSION['personal_id'])) {
 
                 <div>
                     <ul>
-                        <li><a href="https://localhost/PHP-registro/productos.php">Compras</a></li>
+                        <li><a href="https://localhost/PHP-registro/compras-personal.php">Compras</a></li>
                     </ul>  
                 </div> 
 
